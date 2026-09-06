@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KhodaVerse — Live ₹99 Excel Workshop with Ajay Singh Rawat</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,450;9..144,560;9..144,650&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#16241C;
+    --ink-soft:#48594C;
+    --paper:#F1F4EC;
+    --paper-deep:#E7ECDE;
+    --green:#2E7D4F;
+    --green-deep:#1D5638;
+    --amber:#D6952E;
+    --amber-deep:#B87A1D;
+    --line: rgba(22,36,28,0.14);
+    --line-strong: rgba(22,36,28,0.26);
+    --white:#FFFFFF;
+    --max: 1120px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.001ms !important; transition-duration:0.001ms !important;}
+  }
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'IBM Plex Sans', -apple-system, sans-serif;
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{
+    font-family:'Fraunces', Georgia, serif;
+    font-weight:560;
+    color:var(--ink);
+    margin:0;
+    letter-spacing:-0.01em;
+  }
+  .num{ font-family:'IBM Plex Mono', monospace; font-variant-numeric: tabular-nums; }
+  a{color:inherit;}
+  img{max-width:100%; display:block;}
+  button{font-family:inherit; cursor:pointer;}
+  :focus-visible{ outline:2px solid var(--green-deep); outline-offset:3px; }
+
+  .wrap{ max-width:var(--max); margin:0 auto; padding:0 28px; }
+  section{ position:relative; }
+
+  /* ---------- NAV ---------- */
+  .nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(241,244,236,0.92);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav .wrap{
+    display:flex; align-items:center; justify-content:space-between;
+    height:72px;
+  }
+  .brand{ display:flex; align-items:center; gap:10px; font-family:'Fraunces',serif; font-weight:650; font-size:1.15rem; text-decoration:none; }
+  .brand-mark{
+    width:30px;height:30px; border-radius:6px;
+    background:var(--green);
+    display:grid; place-items:center;
+    color:var(--paper); font-family:'IBM Plex Mono',monospace; font-size:0.72rem; font-weight:700;
+  }
+  .nav-links{ display:flex; gap:32px; align-items:center; }
+  .nav-links a{ text-decoration:none; font-size:0.94rem; color:var(--ink-soft); }
+  .nav-links a:hover{ color:var(--ink); }
+  .nav-cta{
+    background:var(--green); color:var(--white); padding:10px 18px; border-radius:4px;
+    font-size:0.92rem; font-weight:600; text-decoration:none; border:none;
+  }
+  .nav-cta:hover{ background:var(--green-deep); }
+  .nav-toggle{ display:none; background:none; border:1px solid var(--line-strong); border-radius:4px; padding:8px 10px; }
+  .nav-toggle span, .nav-toggle span::before, .nav-toggle span::after{
+    display:block; width:18px; height:2px; background:var(--ink); position:relative; content:'';
+  }
+  .nav-toggle span::before{ position:absolute; top:-6px; }
+  .nav-toggle span::after{ position:absolute; top:6px; }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    padding:64px 0 56px;
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size: 100% 44px, 92px 100%;
+    background-position: 0 0, 0 0;
+    border-bottom:1px solid var(--line);
+  }
+  .hero .wrap{ display:grid; grid-template-columns: 1.05fr 0.95fr; gap:56px; align-items:start; }
+  .badge{
+    display:inline-flex; align-items:center; gap:8px;
+    background:var(--white); border:1px solid var(--line-strong);
+    padding:6px 12px; border-radius:100px; font-size:0.85rem; color:var(--ink-soft);
+    margin-bottom:22px;
+  }
+  .badge::before{ content:''; width:7px;height:7px;border-radius:50%; background:var(--amber); }
+  .hero h1{
+    font-size:clamp(2.1rem, 3.6vw, 3.15rem);
+    line-height:1.08;
+    max-width:14ch;
+  }
+  .hero .sub{
+    margin-top:22px; font-size:1.1rem; color:var(--ink-soft); max-width:46ch;
+  }
+  .hero-meta{
+    display:flex; flex-wrap:wrap; gap:10px 22px; margin-top:26px; font-size:0.92rem; color:var(--ink-soft);
+  }
+  .hero-meta span{ display:flex; align-items:center; gap:8px; }
+  .dot{ width:5px;height:5px;border-radius:50%; background:var(--green); flex:none; }
+  .hero-actions{ margin-top:32px; display:flex; align-items:center; gap:18px; flex-wrap:wrap; }
+  .btn-primary{
+    background:var(--amber); color:var(--ink); border:none; padding:16px 26px; border-radius:4px;
+    font-size:1.02rem; font-weight:700; text-decoration:none; display:inline-block;
+    box-shadow: 3px 3px 0 var(--green-deep);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .btn-primary:hover{ transform:translate(-2px,-2px); box-shadow:5px 5px 0 var(--green-deep); }
+  .price-tag{ font-family:'IBM Plex Mono',monospace; font-size:0.95rem; color:var(--ink-soft); }
+  .price-tag b{ color:var(--ink); font-size:1.15rem; }
+  .trust-line{ margin-top:22px; font-size:0.88rem; color:var(--ink-soft); border-left:2px solid var(--green); padding-left:12px; max-width:42ch; }
+
+  /* signature: mock formula bar / worksheet card */
+  .sheet-card{
+    background:var(--white); border:1px solid var(--line-strong); border-radius:6px;
+    box-shadow: 6px 6px 0 var(--paper-deep), 0 0 0 1px var(--line);
+    overflow:hidden;
+  }
+  .sheet-top{
+    display:flex; align-items:center; gap:10px; padding:10px 14px;
+    border-bottom:1px solid var(--line); background:var(--paper-deep);
+    font-family:'IBM Plex Mono',monospace; font-size:0.78rem; color:var(--ink-soft);
+  }
+  .sheet-top .fx{ color:var(--green-deep); font-weight:700; }
+  .sheet-formula{ flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; color:var(--ink); }
+  .sheet-grid{ display:grid; grid-template-columns: 34px repeat(4, 1fr); }
+  .sheet-grid .hcell{
+    background:var(--paper-deep); font-family:'IBM Plex Mono',monospace; font-size:0.72rem; text-align:center;
+    padding:6px 0; color:var(--ink-soft); border-right:1px solid var(--line); border-bottom:1px solid var(--line);
+  }
+  .sheet-grid .rnum{
+    background:var(--paper-deep); font-family:'IBM Plex Mono',monospace; font-size:0.72rem; text-align:center;
+    padding:8px 0; color:var(--ink-soft); border-right:1px solid var(--line); border-bottom:1px solid var(--line);
+  }
+  .sheet-grid .cell{
+    padding:8px 10px; font-size:0.82rem; border-right:1px solid var(--line); border-bottom:1px solid var(--line);
+    min-height:16px; color:var(--ink);
+  }
+  .sheet-grid .cell.active{ background: rgba(46,125,79,0.1); outline:2px solid var(--green); outline-offset:-2px; position:relative; z-index:1; font-weight:600;}
+  .sheet-grid .cell.dim{ color:var(--ink-soft); }
+  .sheet-caption{ padding:12px 14px; font-size:0.82rem; color:var(--ink-soft); border-top:1px solid var(--line); }
+
+  /* ---------- SECTION HEADERS ---------- */
+  .section-head{ max-width:56ch; margin-bottom:44px; }
+  .section-head .kicker{ font-size:0.88rem; color:var(--green-deep); font-weight:600; margin-bottom:10px; }
+  .section-head h2{ font-size:clamp(1.7rem, 2.6vw, 2.3rem); line-height:1.15; }
+  .section-head p{ margin-top:14px; color:var(--ink-soft); font-size:1.03rem; }
+
+  .band{ padding:88px 0; }
+  .band.alt{ background:var(--paper-deep); border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+  .band.ink{ background:var(--ink); color:var(--paper); border-bottom:1px solid var(--line); }
+  .band.ink h2, .band.ink h3{ color:var(--paper); }
+  .band.ink .section-head p{ color:rgba(241,244,236,0.72); }
+
+  /* ---------- PROBLEM ---------- */
+  .quotes{ display:grid; grid-template-columns:repeat(2,1fr); gap:1px; background:var(--line); border:1px solid var(--line); }
+  .quote{
+    background:var(--paper); padding:26px 26px; font-size:1.02rem; color:var(--ink);
+  }
+  .quote span{ display:block; font-family:'IBM Plex Mono',monospace; font-size:0.74rem; color:var(--green-deep); margin-bottom:10px; }
+
+  /* ---------- TRANSFORMATION ---------- */
+  .transform-grid{ display:grid; grid-template-columns:1fr 1fr; border:1px solid var(--line); }
+  .transform-col{ padding:32px; }
+  .transform-col:first-child{ border-right:1px solid var(--line); background:var(--paper-deep); }
+  .transform-label{ font-family:'IBM Plex Mono',monospace; font-size:0.78rem; text-transform:uppercase; letter-spacing:0.06em; margin-bottom:18px; display:block; color:var(--ink-soft); }
+  .transform-col:last-child .transform-label{ color:var(--green-deep); }
+  .transform-col ul{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:14px; }
+  .transform-col li{ padding-left:20px; position:relative; font-size:0.98rem; }
+  .transform-col:first-child li::before{ content:'—'; position:absolute; left:0; color:var(--ink-soft); }
+  .transform-col:last-child li::before{ content:'✓'; position:absolute; left:0; color:var(--green); font-weight:700; }
+
+  /* ---------- AGENDA ---------- */
+  .agenda{ display:flex; flex-direction:column; }
+  .agenda-item{
+    display:grid; grid-template-columns:64px 1fr; gap:24px; padding:26px 0; border-top:1px solid var(--line);
+  }
+  .agenda-item:last-child{ border-bottom:1px solid var(--line); }
+  .agenda-num{ font-family:'IBM Plex Mono',monospace; font-size:0.95rem; color:var(--green-deep); padding-top:4px; }
+  .agenda-item h3{ font-size:1.12rem; font-weight:600; margin-bottom:6px; }
+  .agenda-item p{ color:var(--ink-soft); margin:0; max-width:60ch; }
+
+  /* ---------- AUDIENCE ---------- */
+  .tags{ display:flex; flex-wrap:wrap; gap:10px; }
+  .tag{
+    border:1px solid var(--line-strong); padding:10px 16px; border-radius:100px; font-size:0.92rem; background:var(--paper);
+  }
+  .audience-note{ margin-top:34px; padding:22px 24px; background:var(--paper-deep); border-left:3px solid var(--amber); font-size:0.98rem; max-width:60ch; }
+
+  /* ---------- TRAINER ---------- */
+  .trainer{ display:grid; grid-template-columns: 240px 1fr; gap:44px; align-items:start; }
+  .trainer-photo{
+    width:240px; height:240px; border-radius:8px; background:var(--paper-deep);
+    border:1px solid var(--line-strong); overflow:hidden; flex:none;
+    box-shadow: 0 8px 20px rgba(22,36,28,0.14);
+  }
+  .trainer-photo img{
+    width:100%; height:100%; object-fit:contain; object-position:center 15%; display:block;
+  }
+  .trainer h3{ font-size:1.5rem; margin-bottom:4px; }
+  .trainer .role{ color:var(--green-deep); font-size:0.92rem; font-weight:600; margin-bottom:18px; }
+  .trainer p{ color:var(--ink-soft); max-width:62ch; margin:0 0 14px; }
+
+  /* ---------- FUNNEL / NEXT ---------- */
+  .path{ display:flex; align-items:stretch; gap:0; flex-wrap:wrap; border:1px solid var(--line); }
+  .path-step{ flex:1; min-width:200px; padding:24px; border-right:1px solid var(--line); }
+  .path-step:last-child{ border-right:none; background:rgba(214,149,46,0.12); }
+  .path-step .num{ display:block; font-size:0.78rem; color:var(--ink-soft); margin-bottom:10px; }
+  .path-step h4{ font-family:'IBM Plex Sans',sans-serif; font-weight:600; font-size:1rem; margin:0 0 6px; }
+  .path-step p{ margin:0; color:var(--ink-soft); font-size:0.9rem; }
+
+  /* ---------- FAQ ---------- */
+  .faq-item{ border-top:1px solid var(--line); }
+  .faq-item:last-child{ border-bottom:1px solid var(--line); }
+  .faq-q{
+    width:100%; text-align:left; background:none; border:none; padding:22px 0;
+    display:flex; justify-content:space-between; align-items:center; gap:20px;
+    font-size:1.02rem; font-weight:600; color:var(--ink);
+  }
+  .faq-q .plus{ font-family:'IBM Plex Mono',monospace; font-size:1.2rem; color:var(--green-deep); flex:none; transition:transform 0.2s ease; }
+  .faq-item.open .faq-q .plus{ transform:rotate(45deg); }
+  .faq-a{ max-height:0; overflow:hidden; transition:max-height 0.25s ease; }
+  .faq-a p{ margin:0 0 22px; color:var(--ink-soft); max-width:62ch; }
+  .faq-item.open .faq-a{ max-height:220px; }
+
+  /* ---------- FINAL CTA ---------- */
+  .final-cta{ text-align:left; }
+  .final-cta h2{ font-size:clamp(1.9rem,3.2vw,2.7rem); max-width:20ch; }
+  .final-cta p{ margin-top:16px; color:rgba(241,244,236,0.75); max-width:48ch; font-size:1.05rem; }
+  .final-actions{ margin-top:30px; display:flex; align-items:center; gap:20px; flex-wrap:wrap; }
+  .btn-secondary{
+    border:1px solid rgba(241,244,236,0.4); color:var(--paper); padding:15px 24px; border-radius:4px;
+    text-decoration:none; font-weight:600; font-size:1rem;
+  }
+  .btn-secondary:hover{ background:rgba(241,244,236,0.08); }
+
+  /* ---------- FOOTER ---------- */
+  footer{ padding:40px 0; }
+  .foot-row{ display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:14px; font-size:0.86rem; color:var(--ink-soft); }
+
+  @media (max-width: 860px){
+    .nav-links{ display:none; }
+    .nav-toggle{ display:block; }
+    .hero .wrap{ grid-template-columns:1fr; }
+    .hero{ padding-top:40px; }
+    .quotes{ grid-template-columns:1fr; }
+    .transform-grid{ grid-template-columns:1fr; }
+    .transform-col:first-child{ border-right:none; border-bottom:1px solid var(--line); }
+    .trainer{ grid-template-columns:1fr; }
+    .trainer-photo{ width:104px; height:104px; margin-bottom:6px; }
+    .band{ padding:64px 0; }
+    .path-step{ border-right:none; border-bottom:1px solid var(--line); }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wrap">
+    <a href="#top" class="brand"><span class="brand-mark">KV</span>KhodaVerse</a>
+    <div class="nav-links">
+      <a href="#problem">Why this workshop</a>
+      <a href="#agenda">What you'll see</a>
+      <a href="#trainer">Trainer</a>
+      <a href="#faq">FAQ</a>
+    </div>
+    <a href="#register" class="nav-cta">Join ₹99 Workshop</a>
+    <button class="nav-toggle" aria-label="Menu"><span></span></button>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <div>
+      <div class="badge">Live, hands-on Excel workshop · Not a recording</div>
+      <h1>Excel formulas you already know. Reports you still can't build.</h1>
+      <p class="sub">In one live 90-minute session, Ajay Singh Rawat turns messy, real office data into a professional report in front of you — using the exact VLOOKUP/XLOOKUP, Pivot Table and Power Query moves you'll need at work the next day.</p>
+      <div class="hero-meta">
+        <span><span class="dot"></span>For students, freshers, MIS &amp; accounts professionals</span>
+        <span><span class="dot"></span>90 minutes, live over video</span>
+        <span><span class="dot"></span>Real datasets, not slides</span>
+      </div>
+      <div class="hero-actions">
+        <a href="#register" class="btn-primary">Join ₹99 Live Workshop</a>
+        <span class="price-tag">Seat price: <b class="num">₹99</b></span>
+      </div>
+      <p class="trust-line">No "guaranteed job" promises. No fake income screenshots. Just the Excel skills MIS and reporting teams actually use — demonstrated live, on real data.</p>
+    </div>
+
+    <div class="sheet-card">
+      <div class="sheet-top">
+        <span class="fx">fx</span>
+        <span class="sheet-formula">=TRANSFORM(messy_data, "confused") → "confident, job-ready report"</span>
+      </div>
+      <div class="sheet-grid">
+        <div class="hcell"></div>
+        <div class="hcell">A</div>
+        <div class="hcell">B</div>
+        <div class="hcell">C</div>
+        <div class="hcell">D</div>
+
+        <div class="rnum">1</div>
+        <div class="cell dim">Region</div>
+        <div class="cell dim">Product</div>
+        <div class="cell dim">Units</div>
+        <div class="cell dim">Revenue</div>
+
+        <div class="rnum">2</div>
+        <div class="cell dim">north</div>
+        <div class="cell dim">SKU-04</div>
+        <div class="cell dim">128</div>
+        <div class="cell dim">41,920</div>
+
+        <div class="rnum">3</div>
+        <div class="cell dim">South </div>
+        <div class="cell dim">sku-11</div>
+        <div class="cell dim">64</div>
+        <div class="cell dim">18,240</div>
+
+        <div class="rnum">4</div>
+        <div class="cell">Top Region</div>
+        <div class="cell active">North</div>
+        <div class="cell">Growth</div>
+        <div class="cell active">+18%</div>
+      </div>
+      <div class="sheet-caption">This is the kind of build you'll watch happen live — messy rows on the left, a clean answer on the right.</div>
+    </div>
+  </div>
+</header>
+
+<section class="band" id="problem">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="kicker">The problem</div>
+      <h2>Does Excel feel easy — until real office data lands in your inbox?</h2>
+      <p>Most people don't fail at Excel because they don't know formulas. They fail because nobody taught them how to combine what they know to solve an actual reporting problem.</p>
+    </div>
+    <div class="quotes">
+      <div class="quote"><span>Sound familiar?</span>"I know Excel, but I still struggle with reports."</div>
+      <div class="quote"><span>Sound familiar?</span>"I know formulas individually, but I don't know which one to use, when."</div>
+      <div class="quote"><span>Sound familiar?</span>"My work takes hours because I do everything manually."</div>
+      <div class="quote"><span>Sound familiar?</span>"I don't know how professionals actually build MIS reports."</div>
+    </div>
+  </div>
+</section>
+
+<section class="band alt">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="kicker">The shift</div>
+      <h2>From "I know the formula" to "I can build the report"</h2>
+      <p>This is the gap the workshop closes — not by teaching you new formula names, but by showing you how they combine to answer real business questions.</p>
+    </div>
+    <div class="transform-grid">
+      <div class="transform-col">
+        <span class="transform-label">Before the workshop</span>
+        <ul>
+          <li>Comfortable with SUM, IF, and basic formatting</li>
+          <li>Freezes when handed a 10,000-row export</li>
+          <li>Copies and retypes data for hours by hand</li>
+          <li>Knows formulas individually, not how to combine them</li>
+          <li>Watches faster colleagues and wonders what they're doing differently</li>
+        </ul>
+      </div>
+      <div class="transform-col">
+        <span class="transform-label">After the workshop</span>
+        <ul>
+          <li>Cleans and structures raw, messy data in minutes</li>
+          <li>Builds Pivot Table–based reports with confidence</li>
+          <li>Combines XLOOKUP, IF and conditional formatting to answer real questions</li>
+          <li>Automates repeat steps instead of redoing them by hand</li>
+          <li>Knows where AI fits inside an Excel workflow, and where it doesn't</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="agenda">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="kicker">Inside the 90 minutes</div>
+      <h2>What you'll actually watch get built</h2>
+      <p>No theory-only slides. Every segment ends with something on screen changing from messy to usable.</p>
+    </div>
+    <div class="agenda">
+      <div class="agenda-item">
+        <div class="agenda-num num">01</div>
+        <div>
+          <h3>Messy data → professional report</h3>
+          <p>A real, unstructured export gets cleaned, structured and turned into something you'd actually hand to a manager.</p>
+        </div>
+      </div>
+      <div class="agenda-item">
+        <div class="agenda-num num">02</div>
+        <div>
+          <h3>Automating the repetitive part</h3>
+          <p>The manual, copy-paste work that eats an afternoon gets replaced with a repeatable process.</p>
+        </div>
+      </div>
+      <div class="agenda-item">
+        <div class="agenda-num num">03</div>
+        <div>
+          <h3>Advanced formulas, used with intent</h3>
+          <p>XLOOKUP, nested logic and conditional formatting combined to actually answer a business question — not just demonstrated in isolation.</p>
+        </div>
+      </div>
+      <div class="agenda-item">
+        <div class="agenda-num num">04</div>
+        <div>
+          <h3>Building a live dashboard</h3>
+          <p>Raw numbers become a dynamic report you can filter and update, built step by step in front of you.</p>
+        </div>
+      </div>
+      <div class="agenda-item">
+        <div class="agenda-num num">05</div>
+        <div>
+          <h3>Where AI actually helps inside Excel</h3>
+          <p>A realistic look at using AI as part of an Excel workflow — sped up, not replaced.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band alt">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="kicker">Who this is for</div>
+      <h2>Built for people who already touch Excel at work or college</h2>
+      <p>If you've opened a spreadsheet and felt behind, this workshop is aimed at you.</p>
+    </div>
+    <div class="tags">
+      <span class="tag">College students</span>
+      <span class="tag">Freshers</span>
+      <span class="tag">Job seekers</span>
+      <span class="tag">MIS executives</span>
+      <span class="tag">Accountants</span>
+      <span class="tag">Working professionals</span>
+      <span class="tag">Know basics, stuck at advanced</span>
+      <span class="tag">Want a better data role</span>
+    </div>
+    <div class="audience-note">This isn't a beginner "what is a cell" session, and it isn't a certification exam either. It's built for people who already know basic Excel and want to close the gap between "knowing formulas" and "handling real office data."</div>
+  </div>
+</section>
+
+<section class="band" id="trainer">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="kicker">Your trainer</div>
+      <h2>Taught by someone who builds the report first, then explains it</h2>
+    </div>
+    <div class="trainer">
+      <div class="trainer-photo">
+        <img src="ajay.jpg" alt="Ajay Singh Rawat - Founder of KhodaVerse" loading="lazy" width="240" height="240">
+      </div>
+      <div>
+        <h3>Ajay Singh Rawat</h3>
+        <div class="role">Founder, KhodaVerse</div>
+        <p>Ajay teaches Excel the way it actually gets used inside MIS, reporting and accounting teams — not the way it's presented in disconnected tutorial clips. In this workshop, he works on real, messy datasets live, so you see exactly how a working professional thinks through a data problem from start to finish.</p>
+        <p>His focus isn't formula memorisation. It's judgment — knowing which tool to reach for, and why, when data lands on your desk looking nothing like the textbook example.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band alt">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="kicker">What happens after</div>
+      <h2>The workshop is the starting point, not the pitch</h2>
+      <p>You'll leave the 90 minutes with usable skills either way. For those who want to go further, here's the honest picture of what comes next.</p>
+    </div>
+    <div class="path">
+      <div class="path-step">
+        <span class="num">Step 1</span>
+        <h4>Live ₹99 workshop</h4>
+        <p>You attend, watch the builds, and follow along on your own sheet.</p>
+      </div>
+      <div class="path-step">
+        <span class="num">Step 2</span>
+        <h4>Practice on your own</h4>
+        <p>Take what you learned and apply it to your own reports or job search.</p>
+      </div>
+      <div class="path-step">
+        <span class="num">Step 3</span>
+        <h4>Advanced Excel course, if you want it</h4>
+        <p>At the end, Ajay shares details of a deeper, structured Advanced Excel course for those who want a full roadmap. No pressure to join.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="faq">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="kicker">Questions</div>
+      <h2>Before you register</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q">I'm a complete beginner — is this still for me?<span class="plus">+</span></button>
+        <div class="faq-a"><p>This works best if you already know basic Excel — simple formulas, entering data, basic formatting. If you've never opened Excel before, you'll get more value starting with the fundamentals first.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Is this online or in person?<span class="plus">+</span></button>
+        <div class="faq-a"><p>The workshop is live and online, over video. You'll get the joining link after you register.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">What do I need to attend?<span class="plus">+</span></button>
+        <div class="faq-a"><p>A laptop or desktop with Excel (or a free equivalent like Google Sheets), a stable internet connection, and a willingness to follow along rather than just watch.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Will I get a recording afterwards?<span class="plus">+</span></button>
+        <div class="faq-a"><p>The session is designed to be live and interactive. Recording availability, if any, will be shared with registered attendees closer to the date.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Why charge ₹99 instead of making it free?<span class="plus">+</span></button>
+        <div class="faq-a"><p>A small fee keeps the room full of people who are genuinely committed to showing up and following along — which makes the live session more useful for everyone in it.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Will there be a sales pitch during the workshop?<span class="plus">+</span></button>
+        <div class="faq-a"><p>The 90 minutes are focused on the live Excel demonstrations. Towards the end, Ajay will briefly share details of the Advanced Excel course for anyone who wants to go deeper — it's entirely optional.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band ink" id="register">
+  <div class="wrap final-cta">
+    <h2>Stop learning formulas in isolation. Start learning how they solve real problems.</h2>
+    <p>Seats for the live ₹99 workshop are limited to keep the session interactive. Reserve yours now.</p>
+    <div class="final-actions">
+      <a href="#" class="btn-primary">Join ₹99 Live Workshop</a>
+      <a href="#" class="btn-secondary">Reserve My Seat</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-row">
+    <span>KhodaVerse — Practical, job-oriented Excel training by Ajay Singh Rawat</span>
+    <span>© 2026 KhodaVerse. All rights reserved.</span>
+  </div>
+</footer>
+
+<script>
+  document.querySelectorAll('.faq-q').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var item = btn.closest('.faq-item');
+      var wasOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(function(el){ el.classList.remove('open'); });
+      if(!wasOpen){ item.classList.add('open'); }
+    });
+  });
+
+  var navToggle = document.querySelector('.nav-toggle');
+  var navLinks = document.querySelector('.nav-links');
+  if(navToggle){
+    navToggle.addEventListener('click', function(){
+      var isShown = navLinks.style.display === 'flex';
+      navLinks.style.display = isShown ? 'none' : 'flex';
+      navLinks.style.flexDirection = 'column';
+      navLinks.style.position = 'absolute';
+      navLinks.style.top = '72px';
+      navLinks.style.left = '0';
+      navLinks.style.right = '0';
+      navLinks.style.background = 'var(--paper)';
+      navLinks.style.padding = '20px 28px';
+      navLinks.style.borderBottom = '1px solid var(--line)';
+      navLinks.style.gap = '18px';
+    });
+  }
+</script>
+
+</body>
+</html>
