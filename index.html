@@ -608,6 +608,16 @@ src="https://www.facebook.com/tr?id=1394788988689234&ev=PageView&noscript=1"
     });
   }
 </script>
-
+<script>
+  // Track Lead when Join button is clicked
+  document.querySelectorAll('button, a').forEach(function(el){
+    if(el.textContent.includes('Join')){
+      el.addEventListener('click', function(){
+        fbq('track', 'Lead');
+        console.log('Lead tracked');
+      });
+    }
+  });
+</script>
 </body>
 </html>
