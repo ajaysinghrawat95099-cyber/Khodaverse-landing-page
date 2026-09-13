@@ -609,14 +609,20 @@ src="https://www.facebook.com/tr?id=1394788988689234&ev=PageView&noscript=1"
   }
 </script>
 <script>
-document.body.addEventListener('click', function(e){
-  var btn = e.target.closest('button, a');
-  if(btn){
-    fbq('track', 'Lead');
-    fbq('track', 'InitiateCheckout');
-    console.log('Lead tracked');
-  }
-});
+function sendLead(){
+  fbq('track','Lead');
+  fbq('track','InitiateCheckout');
+  console.log('Lead sent');
+}
+// Saare buttons pe direct lagao
+setTimeout(function(){
+  document.querySelectorAll('button, a').forEach(function(btn){
+    btn.addEventListener('click', sendLead);
+  });
+}, 2000);
+</script>
+</body>
+</html>
 </script>
 </body>
 </html>
